@@ -22,21 +22,40 @@ public class GamePlayer {
     private long id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="Player_id")
-    private String player;
+    private Player player;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="Game_id")
-    private String game;
+    private Game game;
 
     private Date date = new Date();
 
     public GamePlayer() {}
 
-    public GamePlayer(String player, String game){
+    public GamePlayer(Player player, Game game){
 
         this.player = player;
         this.game = game;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public void addPlayer(Player player) {
+    }
+    public void addGame(Game game) {
+    }
 }

@@ -1,6 +1,6 @@
 package com.battleship.salvov2;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import java.util.*;
+import static java.util.stream.Collectors.toList;
 
 @Entity
 public class Player {
@@ -21,17 +22,21 @@ public class Player {
     private long id;
     private String user;
     @OneToMany(mappedBy="player", fetch=FetchType.EAGER)
-    Set<GamePlayer> players;
+    Set<GamePlayer> gamePlayers;
 
-    public void addPlayer(Player player) {
-//        player.setSubscriber(this);
-//        player.add(subscription);
+    public void addPlayer(GamePlayer gameplayer) {
+        gameplayer.setPlayer(this);
+        gamePlayers.add(gameplayer);
+    }
+    @JsonIgnore
+    public List<Game> getGame() {
+        return gamePlayers.stream().map(sub -> sub.getGame()).collect(toList());
     }
 
     public Player(){}
 
-    public Player(String email) {
-        this.user = email;
+    public Player(String user) {
+        this.user = user;
     }
 
     public String getUser() {
