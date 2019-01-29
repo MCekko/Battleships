@@ -9,5 +9,4 @@ import java.util.*;
 
 @RepositoryRestResource
 public interface GameRepository extends JpaRepository<Game, Long> {
-    List<Game> findByDate(Date date);
 }

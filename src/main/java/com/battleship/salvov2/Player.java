@@ -47,6 +47,13 @@ public class Player {
         this.user = user;
     }
 
+    public long getIdPlayer() {
+        return id;
+    }
+
+    public void setIdPlayer(long id) {
+        this.id = id;
+    }
 
     public String toString() {
         return "Player: " +

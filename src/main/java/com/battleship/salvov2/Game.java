@@ -32,11 +32,17 @@ public class Game {
     @JsonIgnore
     public List<Player> getPlayer() {
         return gamePlayers.stream().map(sub -> sub.getPlayer()).collect(toList());
-    }
+}
 
     public Game(){ }
 
+    public Set<GamePlayer> getGamePlayers() {
+        return gamePlayers;
+    }
 
+    public void setGamePlayers(Set<GamePlayer> gamePlayers) {
+        this.gamePlayers = gamePlayers;
+    }
 
     public Date getDate() {
         return date;
@@ -46,10 +52,19 @@ public class Game {
         this.date = date;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String toString() {
         return "Games: " +
                 "date: " + date;
     }
+
 }
 
 

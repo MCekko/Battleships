@@ -32,7 +32,7 @@ $(function() {
     function postPlayer(userName) {
         $.post({
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application.properties/json'
             },
             dataType: "text",
             url: "/players",

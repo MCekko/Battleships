@@ -54,6 +54,14 @@ public class GamePlayer {
         this.game = game;
     }
 
+    public long getIdGamePLayer() {
+        return id;
+    }
+
+    public void setIdGamePLayer(long id) {
+        this.id = id;
+    }
+
     public void addPlayer(Player player) {
     }
     public void addGame(Game game) {
