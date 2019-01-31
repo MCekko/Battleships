@@ -24,35 +24,23 @@ function getData() {
 getData();
 
 function getDataGame() {
-    for(var i = 0;i < data.length; i++){
-       var idGame = data[i].id;
-
-       var dataGamePlayer = data[i].GamePlayers;
-
-       console.log(idGame);
-        console.log(dateGame);
-        console.log(dataGamePlayer);
-
-    }
-    for (var i = 0; i < dataGamePlayer.length; i++) {
-        var gameplayers = data[i].GamePlayers[i].Player;
-        var user = gameplayers.email;
-        console.log(user);
-    }
-    var getIDOL = document.getElementById("listGame");
-    for(var i = 0; i < data.length; i++){
+    for (let i = 0; i < data.length; i++) {
+        var idGame = data[i].id;
         var dateGame = data[i].Date;
+        var newDate = new Date(dateGame);
+        var finalDateGame = newDate.getFullYear() + "/" + newDate.getMonth()+1 + "/" + newDate.getDay() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
+        var dataGamePlayer = data[i].GamePlayers;
+        var getIDOL = document.getElementById("listGame");
         var createdLi = document.createElement("li");
         getIDOL.appendChild(createdLi);
-        createdLi.innerHTML = dateGame;
-    }
+        createdLi.setAttribute("id", "listGameLI");
+        var player1 = dataGamePlayer[0].Player.email;
+        if (dataGamePlayer.length > 1) {
+            var player2 = dataGamePlayer[1].Player.email;
+            createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2;
+        } else {
+            createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player";
 
+        }
+    }
 }
-// function createdLI() {
-//     var getIDOL = document.getElementById("listGame");
-//     for(var i = 0; i < data.length; i++){
-//         var createdLi = document.createElement("li");
-//     }
-//     getIDOL.appendChild(createdLi);
-//     createdLi;
-// }

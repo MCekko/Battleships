@@ -1,17 +1,19 @@
 package com.battleship.salvov2;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.hibernate.annotations.ManyToAny;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
 public class GamePlayer {
@@ -28,6 +30,19 @@ public class GamePlayer {
     @JoinColumn(name="Game_id")
     private Game game;
 
+    @OneToMany(mappedBy="gamePlayer", fetch=FetchType.EAGER)
+    Set<Ship> ships = new HashSet<>();
+
+    public void addShip(Ship ship) {
+        ship.setGamePlayer(this);
+        ships.add(ship);
+    }
+
+    @JsonIgnore
+    public List<Ship> getShip() {
+        return ships.stream().map(sub -> sub.getShips()).collect(toList());
+    }
+
     private Date date = new Date();
 
     public GamePlayer() {}
@@ -36,6 +51,8 @@ public class GamePlayer {
 
         this.player = player;
         this.game = game;
+
+
     }
 
     public Player getPlayer() {
@@ -54,8 +71,18 @@ public class GamePlayer {
         this.game = game;
     }
 
+
+
     public long getIdGamePLayer() {
         return id;
+    }
+
+    public Set<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(Set<Ship> ships) {
+        this.ships = ships;
     }
 
     public void setIdGamePLayer(long id) {
@@ -65,5 +92,7 @@ public class GamePlayer {
     public void addPlayer(Player player) {
     }
     public void addGame(Game game) {
+    }
+    public void addShips(Ship Ships) {
     }
 }

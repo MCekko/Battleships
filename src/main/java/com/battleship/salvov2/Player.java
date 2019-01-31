@@ -22,7 +22,7 @@ public class Player {
     private long id;
     private String user;
     @OneToMany(mappedBy="player", fetch=FetchType.EAGER)
-    Set<GamePlayer> gamePlayers;
+    Set<GamePlayer> gamePlayers = new HashSet<>();
 
     public void addPlayer(GamePlayer gameplayer) {
         gameplayer.setPlayer(this);

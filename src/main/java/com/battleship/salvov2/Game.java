@@ -23,7 +23,7 @@ public class Game {
     private Date date = new Date();
 
     @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
-    Set<GamePlayer> gamePlayers;
+    Set<GamePlayer> gamePlayers = new HashSet<>();
 
     public void addGame(GamePlayer gameplayer) {
         gameplayer.setGame(this);
