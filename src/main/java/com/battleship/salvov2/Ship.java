@@ -29,8 +29,9 @@ public class Ship {
 
 public Ship (){}
 
-    public Ship(String ship) {
+    public Ship(String ship, List ships) {
         this.shipType = ship;
+        this.listPosition = ships;
     }
 
     public long getIdShip() {

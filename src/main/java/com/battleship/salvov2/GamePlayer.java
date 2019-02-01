@@ -4,9 +4,6 @@ package com.battleship.salvov2;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -39,8 +36,8 @@ public class GamePlayer {
     }
 
     @JsonIgnore
-    public List<Ship> getShip() {
-        return ships.stream().map(sub -> sub.getShips()).collect(toList());
+    public List<String> getShip() {
+        return ships.stream().map(sub -> sub.getShipType()).collect(toList());
     }
 
     private Date date = new Date();
@@ -93,6 +90,5 @@ public class GamePlayer {
     }
     public void addGame(Game game) {
     }
-    public void addShips(Ship Ships) {
-    }
+
 }
