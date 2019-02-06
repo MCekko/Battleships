@@ -35,10 +35,6 @@ public class GamePlayer {
         ships.add(ship);
     }
 
-    @JsonIgnore
-    public List<String> getShip() {
-        return ships.stream().map(sub -> sub.getShipType()).collect(toList());
-    }
 
     private Date date = new Date();
 
