@@ -129,8 +129,8 @@ public class Salvov2Application {
             gp9.addShip(s19);
             gp10.addShip(s20);
             gp10.addShip(s21);
-            gp12.addShip(s22);
-            gp12.addShip(s23);
+            gp11.addShip(s22);
+            gp11.addShip(s23);
             gp13.addShip(s24);
             gp13.addShip(s25);
             gp14.addShip(s26);
