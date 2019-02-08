@@ -25,6 +25,12 @@ function getParameterByName(name) {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 function createdTable() {
+
+    var playersInGame = document.getElementById("PlayerinGame");
+    var dataGamePlayer2 = data.Game.GamePlayers;
+        playersInGame.textContent = dataGamePlayer2[0].Player.email + " vs " + dataGamePlayer2[1].Player.email
+
+
     var arrayNumbers = [" ",1,2,3,4,5,6,7,8,9,10];
 
     var arrayLetter = ["A","B","C","D","E","F","G","H","I","J"];
@@ -57,7 +63,19 @@ function createdTable() {
             createdTD2.setAttribute("id", arrayLetter[j] + arrayNumbers[w +1]);
         }
     }
+
+    var dataShips2 =data.Ship;
+    for(var b = 0; b < dataShips2.length; b++){
+        var dataLocation2 = dataShips2[b].Location;
+
+        for (var q= 0; q <dataLocation2.length; q++) {
+            console.log(document.getElementById(dataLocation2[q]));
+            document.getElementById(dataLocation2[q]).setAttribute("class", "locationShips");
+            }
+    }
+
 }
+
 function getDataGamePlayer() {
 
         var idGame = data.Game.id;
