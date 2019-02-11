@@ -17,7 +17,8 @@ public class Salvov2Application {
 	public CommandLineRunner initData(PlayerRepository playerRepository,
                                       GameRepository gameRepository,
                                       GamePlayerRepository gamePlayerRepository,
-                                      ShipRepository shipRepository) {
+                                      ShipRepository shipRepository,
+                                      SalvoRepository salvoRepository) {
 
         return (args) -> {
             // save a couple of customers
@@ -80,6 +81,48 @@ public class Salvov2Application {
             Ship s25 = new Ship("Patrol Boat",location7);
             Ship s26 = new Ship("Submarine",location8);
             Ship s27 = new Ship("Patrol Boat",location9);
+            List<String> shot1 = Arrays.asList("B5", "C5", "F1");
+            List<String> shot2 = Arrays.asList("B4", "B5", "B6");
+            List<String> shot3 = Arrays.asList("F2", "D5");
+            List<String> shot4 = Arrays.asList("E1", "H3", "A2");
+            List<String> shot5 = Arrays.asList("A2", "A4", "G6");
+            List<String> shot6 = Arrays.asList("B5", "D5", "C7");
+            List<String> shot7 = Arrays.asList("A3", "H6");
+            List<String> shot8 = Arrays.asList("C5", "C6");
+            List<String> shot9 = Arrays.asList("G6", "H6", "A4");
+            List<String> shot10 = Arrays.asList("H1", "H2", "H3");
+            List<String> shot11 = Arrays.asList("A2", "A3", "D8");
+            List<String> shot12 = Arrays.asList("E1", "F2", "G3");
+            List<String> shot13 = Arrays.asList("A3", "A4", "F7");
+            List<String> shot14 = Arrays.asList("B5", "C6", "H1");
+            List<String> shot15 = Arrays.asList("A2", "G6", "H6");
+            List<String> shot16 = Arrays.asList("C5", "C7", "D5");
+            List<String> shot17 = Arrays.asList("A1", "A2", "A3");
+            List<String> shot18 = Arrays.asList("B5", "B6", "C7");
+            List<String> shot19= Arrays.asList("G6", "G7", "G8");
+            List<String> shot20 = Arrays.asList("C6", "D6", "E6");
+            List<String> shot21 = Arrays.asList("H1", "H8");
+            Salvo salvo1 = new Salvo(1, shot1);
+            Salvo salvo2 = new Salvo(1, shot2);
+            Salvo salvo3 = new Salvo(2, shot3);
+            Salvo salvo4 = new Salvo(2, shot4);
+            Salvo salvo5 = new Salvo(1, shot5);
+            Salvo salvo6 = new Salvo(1, shot6);
+            Salvo salvo7 = new Salvo(2, shot7);
+            Salvo salvo8 = new Salvo(2, shot8);
+            Salvo salvo9 = new Salvo(1, shot9);
+            Salvo salvo10 = new Salvo(1, shot10);
+            Salvo salvo11 = new Salvo(2, shot11);
+            Salvo salvo12 = new Salvo(2, shot12);
+            Salvo salvo13 = new Salvo(1, shot13);
+            Salvo salvo14 = new Salvo(1, shot14);
+            Salvo salvo15 = new Salvo(2, shot15);
+            Salvo salvo16 = new Salvo(2, shot16);
+            Salvo salvo17 = new Salvo(1, shot17);
+            Salvo salvo18 = new Salvo(1, shot18);
+            Salvo salvo19 = new Salvo(2, shot19);
+            Salvo salvo20 = new Salvo(2, shot20);
+            Salvo salvo21 = new Salvo(3, shot21);
             GamePlayer gp1 = new GamePlayer(p1,g1);
             GamePlayer gp2 = new GamePlayer(p2,g1);
             GamePlayer gp3 = new GamePlayer(p1,g2);
@@ -135,6 +178,27 @@ public class Salvov2Application {
             gp13.addShip(s25);
             gp14.addShip(s26);
             gp14.addShip(s27);
+            gp1.addSalvo(salvo1);
+            gp2.addSalvo(salvo2);
+            gp1.addSalvo(salvo3);
+            gp2.addSalvo(salvo4);
+            gp3.addSalvo(salvo5);
+            gp4.addSalvo(salvo6);
+            gp3.addSalvo(salvo7);
+            gp4.addSalvo(salvo8);
+            gp5.addSalvo(salvo9);
+            gp6.addSalvo(salvo10);
+            gp5.addSalvo(salvo11);
+            gp6.addSalvo(salvo12);
+            gp7.addSalvo(salvo13);
+            gp8.addSalvo(salvo14);
+            gp7.addSalvo(salvo15);
+            gp8.addSalvo(salvo16);
+            gp9.addSalvo(salvo17);
+            gp10.addSalvo(salvo18);
+            gp9.addSalvo(salvo19);
+            gp10.addSalvo(salvo20);
+            gp10.addSalvo(salvo21);
             shipRepository.save(s1);
             shipRepository.save(s2);
             shipRepository.save(s3);
@@ -162,6 +226,28 @@ public class Salvov2Application {
             shipRepository.save(s25);
             shipRepository.save(s26);
             shipRepository.save(s27);
+            salvoRepository.save(salvo1);
+            salvoRepository.save(salvo2);
+            salvoRepository.save(salvo3);
+            salvoRepository.save(salvo4);
+            salvoRepository.save(salvo5);
+            salvoRepository.save(salvo6);
+            salvoRepository.save(salvo7);
+            salvoRepository.save(salvo8);
+            salvoRepository.save(salvo9);
+            salvoRepository.save(salvo10);
+            salvoRepository.save(salvo11);
+            salvoRepository.save(salvo12);
+            salvoRepository.save(salvo13);
+            salvoRepository.save(salvo14);
+            salvoRepository.save(salvo15);
+            salvoRepository.save(salvo16);
+            salvoRepository.save(salvo17);
+            salvoRepository.save(salvo18);
+            salvoRepository.save(salvo19);
+            salvoRepository.save(salvo20);
+            salvoRepository.save(salvo21);
+
 
         };
     }

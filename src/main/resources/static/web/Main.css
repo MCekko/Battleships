@@ -1,3 +1,9 @@
 .locationShips{
+    background-color: blue;
+}
+.locationShot{
     background-color: red;
+}
+.locationHit{
+    background-color: yellow;
 }

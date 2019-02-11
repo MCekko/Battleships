@@ -55,8 +55,19 @@ public class SalvoController {
         return dto;
     }
 
+    private Map<String, Object> makeShotDTO(Salvo salvo) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("Turn", salvo.getTurn());
+        dto.put("Player", salvo.getGamePlayer().getPlayer().getIdPlayer());
+        dto.put("Location",salvo.getListShot());
+        return dto;
+    }
+    private Map<String, Object> makeSalvoDTO(Set<Salvo> salvo) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("salvo", salvo.stream().map(sv -> makeShotDTO(sv)).collect(Collectors.toList()));
 
-
+        return dto;
+    }
 
     @RequestMapping("/games")
     public List<Map<String, Object>> getAllGames() {
@@ -68,8 +79,12 @@ public class SalvoController {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         GamePlayer gamePlayer = gamePlayerRepository.findOne(gameplayerID);
         Set<Ship> ships = gamePlayer.getShips();
+        Set<Salvo> salvos = gamePlayer.getSalvos();
+        Game game = gamePlayer.getGame();
+        Set<GamePlayer> gamePlayers = game.getGamePlayers();
         dto.put("Game", makeGamesDTO(gamePlayer.getGame()));
         dto.put("Ship", ships.stream().map(s -> makeShipDTO(s)).collect(Collectors.toList()));
+        dto.put("Salvoes", gamePlayers.stream().map(gp -> makeSalvoDTO(gp.getSalvos())).collect(Collectors.toList()));
         return dto;
     }
 }
