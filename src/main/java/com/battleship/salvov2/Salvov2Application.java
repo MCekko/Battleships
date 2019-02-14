@@ -18,7 +18,8 @@ public class Salvov2Application {
                                       GameRepository gameRepository,
                                       GamePlayerRepository gamePlayerRepository,
                                       ShipRepository shipRepository,
-                                      SalvoRepository salvoRepository) {
+                                      SalvoRepository salvoRepository,
+                                      ScoreRepository scoreRepository) {
 
         return (args) -> {
             // save a couple of customers
@@ -248,7 +249,23 @@ public class Salvov2Application {
             salvoRepository.save(salvo20);
             salvoRepository.save(salvo21);
 
+            Score score1 = new Score(1.0,p1,g1);
+            Score score2 = new Score(0.0,p2,g1);
+            Score score3 = new Score(0.5,p1,g2);
+            Score score4 = new Score(0.5,p2,g2);
+            Score score5 = new Score(1.0,p2,g3);
+            Score score6 = new Score(0.0,p4,g3);
+            Score score7 = new Score(0.5,p2,g4);
+            Score score8 = new Score(0.5,p1,g4);
 
+            scoreRepository.save(score1);
+            scoreRepository.save(score2);
+            scoreRepository.save(score3);
+            scoreRepository.save(score4);
+            scoreRepository.save(score5);
+            scoreRepository.save(score6);
+            scoreRepository.save(score7);
+            scoreRepository.save(score8);
         };
     }
 }

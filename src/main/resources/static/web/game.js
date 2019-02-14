@@ -14,22 +14,49 @@ function getData() {
         getDataGamePlayer();
         createdTable();
         createdTableShot();
+        // getOwnerofGame();
         console.log(data);
     }).catch(function (error) {
         console.log("Request failed:" + error.message);
     });
 
 }
+var playerOwner;
+var playerOwnerID;
+var playerOponent;
+var idPlayerOwner;
+function getOwnerofGame() {
+    idPlayerOwner = getParameterByName("gp");
+    var dataIDGamePlayer = data.Game.GamePlayers;
+    console.log(dataIDGamePlayer);
+    for (var h = 0; h < dataIDGamePlayer.length; h++){
+        var dataIDPlayerInGame = dataIDGamePlayer[h].id;
+        console.log(dataIDPlayerInGame);
+
+        if(idPlayerOwner == dataIDPlayerInGame){
+            playerOwner = dataIDGamePlayer[h].Player.email;
+            playerOwnerID = dataIDGamePlayer[h].Player.id;
+        }else{
+            playerOponent = dataIDGamePlayer[h].Player.email;
+
+        }
+    }
+    console.log(playerOwner);
+    console.log(playerOwnerID);
+    console.log(playerOponent);
+    console.log(getParameterByName("gp"));
+}
+
 
 function getParameterByName(name) {
     var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 function createdTable() {
-
+    getOwnerofGame();
     var playersInGame = document.getElementById("PlayerinGame");
     var dataGamePlayer2 = data.Game.GamePlayers;
-        playersInGame.textContent = dataGamePlayer2[0].Player.email + " vs " + dataGamePlayer2[1].Player.email
+        playersInGame.textContent = playerOwner + " vs " + playerOponent;
 
 
     var arrayNumbers = [" ",1,2,3,4,5,6,7,8,9,10];
@@ -64,20 +91,21 @@ function createdTable() {
             createdTD2.setAttribute("id", arrayLetter[j] + arrayNumbers[w +1]);
         }
     }
-
     var dataShips2 =data.Ship;
     for(var b = 0; b < dataShips2.length; b++){
         var dataLocation2 = dataShips2[b].Location;
 
         for (var q= 0; q <dataLocation2.length; q++) {
-            console.log(document.getElementById(dataLocation2[q]));
-            document.getElementById(dataLocation2[q]).setAttribute("class", "locationShips");
+                document.getElementById(dataLocation2[q]).setAttribute("class", "locationShips");
             }
     }
 
 }
 
 function createdTableShot() {
+
+    getOwnerofGame();
+
     var arrayNumbers2 = [" ",1,2,3,4,5,6,7,8,9,10];
 
     var arrayLetter2 = ["A","B","C","D","E","F","G","H","I","J"];
@@ -113,6 +141,13 @@ function createdTableShot() {
 
     var dataShot =data.Salvoes;
     var dataGamePlayer2 = data.Game.GamePlayers;
+    var dataShipLocation = data.Ship;
+
+    for(var p = 0; p < dataShipLocation.length; p++) {
+
+        var dataShips2 = dataShipLocation[p].Location;
+    }
+
     for(var a = 0; a < dataGamePlayer2.length; a++) {
 
         var dataIDPlayer2 = dataGamePlayer2[a].Player.id;
@@ -124,20 +159,27 @@ function createdTableShot() {
             var dataShotLocation2 = dataShotLocation[q].Location;
             var dataTurn = dataShotLocation[q].Turn;
             var dataPlayerShot = dataShotLocation[q].Player;
-            console.log(dataShotLocation2);
 
-            for (var t = 0; t < dataShotLocation2.length;t++){
-                if (dataIDPlayer2 == dataPlayerShot) {
+            for (var t = 0; t < dataShotLocation2.length;t++) {
+                if (dataPlayerShot == idPlayerOwner) {
                     document.getElementById(dataShotLocation2[t] + "s").setAttribute("class", "locationShot");
                     document.getElementById(dataShotLocation2[t] + "s").textContent = dataTurn;
-                }
-                 else if (dataIDPlayer2 != dataPlayerShot){
-                document.getElementById(dataShotLocation2[t]).setAttribute("class", "locationHit");
-                document.getElementById(dataShotLocation2[t]).textContent = dataTurn;
+                }else{
+                        console.log(dataShotLocation2[t]);
+
+                    if(document.getElementById(dataShotLocation2[t]).getAttribute("class") == "locationShips"){
+                        document.getElementById(dataShotLocation2[t]).setAttribute("class", "locationHit");
+                        document.getElementById(dataShotLocation2[t]).textContent = dataTurn;
+
+                    }else{
+                        document.getElementById(dataShotLocation2[t]).setAttribute("class", "locationHitWater");
+                        document.getElementById(dataShotLocation2[t]).textContent = dataTurn;
+                    }
                 }
             }
+            }
         }
-    }
+
 }
 
 function getDataGamePlayer() {
@@ -159,5 +201,5 @@ function getDataGamePlayer() {
     console.log(dataLocation);
 
 }
-console.log(getParameterByName("gp"));
+
 getData();

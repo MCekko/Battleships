@@ -27,6 +27,7 @@ public class SalvoController {
     private GamePlayerRepository gamePlayerRepository;
 
 
+
     private Map<String, Object> makeGamesDTO(Game game) {
             Map<String, Object> dto = new LinkedHashMap<String, Object>();
             dto.put("id", game.getId());
@@ -68,10 +69,41 @@ public class SalvoController {
 
         return dto;
     }
+    public Map<String, Object> makeScoresDto(Set<Score> scores ) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        int won=0;
+        int lost=0;
+        int tied=0;
+        double total=0;
+        String player="";
 
+        for(Score score : scores) {
+            if (score.getScore() == 1) {
+                won += 1;
+            } else if (score.getScore() == 0.5) {
+                tied += 1;
+            } else if (score.getScore() == 0) {
+                lost += 1;
+            } else {
+                System.out.print("Set a correct number!!!!");
+            }
+            player = score.getPlayer().getUser();
+            total += score.getScore();
+        }
+        dto.put("player", player);
+        dto.put("won", won);
+        dto.put("lost", lost);
+        dto.put("tied", tied);
+        dto.put("total", total);
+        System.out.print(total);
+        return dto;
+    }
     @RequestMapping("/games")
-    public List<Map<String, Object>> getAllGames() {
-        return gameRepository.findAll().stream().map(sub -> makeGamesDTO(sub)).collect(Collectors.toList());
+    public Map<String, Object> getAllGames() {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("games", gameRepository.findAll().stream().map(sub -> makeGamesDTO(sub)).collect(Collectors.toList()));
+        dto.put("leaderBoard",playerRepo.findAll().stream().map(pl -> makeScoresDto(pl.getScores())).collect(Collectors.toList()));
+        return dto;
     }
 
     @RequestMapping("/game_view/{gameplayerID}")

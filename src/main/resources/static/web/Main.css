@@ -1,9 +1,12 @@
 .locationShips{
-    background-color: blue;
+    background-color: yellow;
 }
 .locationShot{
-    background-color: red;
+    background-color: green;
+}
+.locationHitWater{
+    background-color: blue;
 }
 .locationHit{
-    background-color: yellow;
+    background-color: red;
 }
