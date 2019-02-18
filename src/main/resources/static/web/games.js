@@ -1,6 +1,7 @@
 
 var data;
-
+var password;
+var name;
 
 function getData() {
     fetch("/api/games", {
@@ -37,7 +38,7 @@ function getDataGame() {
         createdLi.setAttribute("id", "listGameLI");
         for (var w = 0; w < dataGamePlayer.length; w++) {
 
-            var player1 = dataGamePlayer[w].Player.email;
+            var player1 = dataGamePlayer[0].Player.email;
             if (dataGamePlayer.length > 1) {
                 var player2 = dataGamePlayer[1].Player.email;
                 createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2;
@@ -66,7 +67,7 @@ function insertScores () {
     }
 
 
-    for (var i = 0; i < arrayThead.length; i++) {
+    for (var i = 0; i < data.leaderBoard.length; i++) {
         if (data.leaderBoard[i].player != "") {
             var newTr1 = document.createElement("tr");
 
@@ -92,4 +93,48 @@ function insertScores () {
             newTr1.appendChild(newtd6);
         }
     }
+}
+
+function Login() {
+
+    password = document.getElementById("password").value;
+    name = document.getElementById("name").value;
+    fetch("/api/login", {
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        body: 'name=' + name + '&password=' + password,
+    })
+        .then(function (data) {
+            console.log('Request success: ', data);
+
+
+        }).then(function () {
+
+    })
+        .catch(function (error) {
+            console.log('Request failure: ', error);
+        });
+}
+
+function Logout() {
+    fetch("/api/logout", {
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+    })
+        .then(function (data) {
+            console.log('Request success: ', data);
+
+
+        }).then(function () {
+
+    })
+        .catch(function (error) {
+            console.log('Request failure: ', error);
+        });
 }
