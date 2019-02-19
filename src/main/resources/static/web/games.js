@@ -2,7 +2,8 @@
 var data;
 var password;
 var name;
-
+var password2;
+var name2;
 function getData() {
     fetch("/api/games", {
         method: "GET",
@@ -126,6 +127,34 @@ function Logout() {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         method: 'POST',
+    })
+        .then(function (data) {
+            console.log('Request success: ', data);
+
+
+        }).then(function () {
+
+    })
+        .catch(function (error) {
+            console.log('Request failure: ', error);
+        });
+}
+function Signup() {
+
+    password2 = document.getElementById("password2").value;
+    name2 = document.getElementById("name2").value;
+
+    fetch("/api/players", {
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            user: name2,
+            password: password2,
+        })
     })
         .then(function (data) {
             console.log('Request success: ', data);

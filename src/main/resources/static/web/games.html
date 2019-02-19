@@ -8,7 +8,7 @@
 <h1>Battleships</h1>
 <form onsubmit="return false">
 <div>
-    <label>Name:</label>
+    <label>Email:</label>
     <input type="email" id="name" />
     <label>Password:</label>
     <input type="password" id="password" />
@@ -20,6 +20,17 @@
 <div>
     <button onclick="Logout()">Logout</button>
 </div>
+<form onsubmit="return false">
+    <div>
+        <label>Email:</label>
+        <input type="email" id="name2" />
+        <label>Password:</label>
+        <input type="password" id="password2" />
+    </div>
+    <div>
+        <button onclick="Signup()">Signup</button>
+    </div>
+</form>
 <ol id = "listGame"></ol>
 <table id="TableScore"></table>
 <script src="games.js"></script>
