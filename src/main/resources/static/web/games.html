@@ -2,35 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="Main.css">
     <title>Battleships</title>
 </head>
 <body>
-<h1>Battleships</h1>
-<form onsubmit="return false">
-<div>
-    <label>Email:</label>
-    <input type="email" id="name" />
-    <label>Password:</label>
-    <input type="password" id="password" />
-</div>
-<div>
-    <button onclick="Login()">Login</button>
-</div>
-</form>
-<div>
-    <button onclick="Logout()">Logout</button>
-</div>
-<form onsubmit="return false">
-    <div>
+<svg viewbox="0 0 100 20">
+    <defs>
+        <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="10%" stop-color="#00FFFF"/>
+            <stop offset="90%" stop-color="#0000FF"/>
+        </linearGradient>
+        <pattern id="wave" x="0" y="0" width="120" height="20" patternUnits="userSpaceOnUse">
+            <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)">
+                <animateTransform
+                        attributeName="transform"
+                        begin="0s"
+                        dur="1.5s"
+                        type="translate"
+                        from="0,0"
+                        to="40,0"
+                        repeatCount="indefinite" />
+            </path>
+        </pattern>
+    </defs>
+    <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)"  fill-opacity="0.6">Battleships</text>
+    <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#gradient)" fill-opacity="0.2">Battleships</text>
+</svg>
+<div id="form1" >
+    <div class="form1">
         <label>Email:</label>
-        <input type="email" id="name2" />
+        <input type="email" id="name" />
         <label>Password:</label>
-        <input type="password" id="password2" />
+        <input type="password" id="password" />
+        <div >
+            <button class="button2" onclick="Login()">Login</button>
+            <button class="button2" onclick="Signup()">Signup</button>
+        </div>
     </div>
-    <div>
-        <button onclick="Signup()">Signup</button>
-    </div>
-</form>
+</div>
+<div id="logout">
+    <button class="button2" onclick="Logout()">Logout</button>
+</div>
 <ol id = "listGame"></ol>
 <table id="TableScore"></table>
 <script src="games.js"></script>

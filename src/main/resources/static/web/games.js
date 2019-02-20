@@ -2,8 +2,6 @@
 var data;
 var password;
 var name;
-var password2;
-var name2;
 function getData() {
     fetch("/api/games", {
         method: "GET",
@@ -27,7 +25,7 @@ function getData() {
 getData();
 
 function getDataGame() {
-    for (let i = 0; i < data.games.length; i++) {
+    for (var i = 0; i < data.games.length; i++) {
         var idGame = data.games[i].id;
         var dateGame = data.games[i].Date;
         var newDate = new Date(dateGame);
@@ -141,8 +139,8 @@ function Logout() {
 }
 function Signup() {
 
-    password2 = document.getElementById("password2").value;
-    name2 = document.getElementById("name2").value;
+    password = document.getElementById("password").value;
+    name = document.getElementById("name").value;
 
     fetch("/api/players", {
         credentials: 'include',
@@ -152,8 +150,8 @@ function Signup() {
         },
         method: 'POST',
         body: JSON.stringify({
-            user: name2,
-            password: password2,
+            user: name,
+            password: password,
         })
     })
         .then(function (data) {
@@ -167,3 +165,10 @@ function Signup() {
             console.log('Request failure: ', error);
         });
 }
+
+// function hideDiv() {
+//     var x = document.getElementById("listGame");
+//     x.style.display = "none";
+//     var y = document.getElementById("TableScore");
+//     y.style.display = "none";
+// }

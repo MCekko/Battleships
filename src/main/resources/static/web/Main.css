@@ -1,3 +1,74 @@
+
+*{
+    color: white;
+    font-family: "Yu Gothic Light";
+}
+body {
+    background-image: url(fondo.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+svg{font-weight:bold;max-width:600px;height:auto;}
+.form1{
+    display: flex;
+    align-items: center;
+}
+input[type=email] {
+    border: 2px solid blue;
+    border-radius: 4px;
+    margin: 8px 11px;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+input[type=email]:focus {
+    border-color: red;
+    box-shadow: 0 0 8px 0 dodgerBlue;
+}
+input[type=password] {
+    border: 2px solid blue;
+    border-radius: 4px;
+    margin: 8px 11px;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+input[type=password]:focus {
+    border-color: red;
+    box-shadow: 0 0 8px 0 dodgerBlue;
+}
+.button2 {
+    padding: 11px 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #998C8B;
+    font-weight: bold;
+    font-size: 125%;
+    width: 85px;
+    margin: 5px;
+}
+
+.button2:hover {
+    background-color: blue;
+}
+
+.button2:active {
+    background-color: red;
+    box-shadow: 0 5px #998C8B;
+    transform: translateY(4px);
+}
+
+ /*ships location*/
 .locationShips{
     background-color: yellow;
 }
@@ -10,3 +81,7 @@
 .locationHit{
     background-color: red;
 }
+/*label{*/
+    /*color: white;*/
+    /*font-family: "Comic Sans MS";*/
+/*}*/
