@@ -2,6 +2,7 @@
 var data;
 var password;
 var name;
+getData();
 function getData() {
     fetch("/api/games", {
         method: "GET",
@@ -15,6 +16,8 @@ function getData() {
         data = json;
         getDataGame();
         insertScores ();
+        hideandShowLogin();
+        hideButtonGames();
         console.log(data);
     }).catch(function (error) {
         console.log("Request failed:" + error.message);
@@ -22,14 +25,12 @@ function getData() {
 
 }
 
-getData();
-
 function getDataGame() {
     for (var i = 0; i < data.games.length; i++) {
         var idGame = data.games[i].id;
         var dateGame = data.games[i].Date;
         var newDate = new Date(dateGame);
-        var finalDateGame = newDate.getFullYear() + "/" + newDate.getMonth()+1 + "/" + newDate.getDay() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
+        var finalDateGame = newDate.getFullYear() + "/" + newDate.getMonth() + 1 + "/" + newDate.getDay() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
         var dataGamePlayer = data.games[i].GamePlayers;
         var getIDOL = document.getElementById("listGame");
         var createdLi = document.createElement("li");
@@ -40,15 +41,24 @@ function getDataGame() {
             var player1 = dataGamePlayer[0].Player.email;
             if (dataGamePlayer.length > 1) {
                 var player2 = dataGamePlayer[1].Player.email;
-                createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2;
-            } else {
-                createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player";
+                if (data.PlayerLogin != null) {
+                    if (data.PlayerLogin.email == player1 || data.PlayerLogin.email == player2) {
+                        createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2 + "<button id='Entry' class='button3'> Entry </button>";
 
+                    }else{
+                        createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2;
+                    }
+
+                }else{
+                    createdLi.innerHTML = finalDateGame + " " + player1 +  player2;
+                }} else {
+                    createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player" + "<button id='Join' class='button3'> Join </button>";
+
+                }
             }
         }
-    }
-}
 
+}
 function insertScores () {
     var arrayThead = ["Name", "Total", "Won", "Lost", "Tied"];
     var newThead = document.createElement("thead");
@@ -108,8 +118,7 @@ function Login() {
     })
         .then(function (data) {
             console.log('Request success: ', data);
-
-
+            window.location.reload();
         }).then(function () {
 
     })
@@ -129,6 +138,7 @@ function Logout() {
         .then(function (data) {
             console.log('Request success: ', data);
 
+            window.location.reload();
 
         }).then(function () {
 
@@ -156,7 +166,7 @@ function Signup() {
     })
         .then(function (data) {
             console.log('Request success: ', data);
-
+            Login();
 
         }).then(function () {
 
@@ -166,9 +176,25 @@ function Signup() {
         });
 }
 
-// function hideDiv() {
-//     var x = document.getElementById("listGame");
-//     x.style.display = "none";
-//     var y = document.getElementById("TableScore");
-//     y.style.display = "none";
-// }
+function hideandShowLogin() {
+    if (data.PlayerLogin == null) {
+        var x = document.getElementById("logout");
+        x.style.display = "none";
+    }
+    else if(data.PlayerLogin) {
+        var y = document.getElementById("login");
+        y.style.display = "none";
+        var w = document.getElementById("form1");
+        w.style.display = "none";
+    }
+}
+
+function hideButtonGames() {
+            if (data.PlayerLogin == null){
+                var m = document.getElementsByClassName("button3");
+                for (var t = 0; t < m.length; t++){
+                m[t].style.display = "none";
+                }
+            }
+}
+

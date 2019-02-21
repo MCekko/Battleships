@@ -27,6 +27,7 @@ input[type=email] {
 input[type=email]:focus {
     border-color: red;
     box-shadow: 0 0 8px 0 dodgerBlue;
+    color: black;
 }
 input[type=password] {
     border: 2px solid blue;
@@ -40,6 +41,8 @@ input[type=password] {
 input[type=password]:focus {
     border-color: red;
     box-shadow: 0 0 8px 0 dodgerBlue;
+    color: black;
+
 }
 .button2 {
     padding: 11px 5px;
@@ -67,6 +70,32 @@ input[type=password]:focus {
     box-shadow: 0 5px #998C8B;
     transform: translateY(4px);
 }
+.button3 {
+    padding: 11px 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #998C8B;
+    font-weight: bold;
+    font-size: 125%;
+    width: 85px;
+    margin: 5px;
+}
+
+.button3:hover {
+    background-color: blue;
+}
+
+.button3:active {
+    background-color: red;
+    box-shadow: 0 5px #998C8B;
+    transform: translateY(4px);
+}
 
  /*ships location*/
 .locationShips{
@@ -81,7 +110,3 @@ input[type=password]:focus {
 .locationHit{
     background-color: red;
 }
-/*label{*/
-    /*color: white;*/
-    /*font-family: "Comic Sans MS";*/
-/*}*/
