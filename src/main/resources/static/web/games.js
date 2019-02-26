@@ -37,14 +37,16 @@ function getDataGame() {
         getIDOL.appendChild(createdLi);
         createdLi.setAttribute("id", "listGameLI");
         for (var w = 0; w < dataGamePlayer.length; w++) {
-
             var player1 = dataGamePlayer[0].Player.email;
             if (dataGamePlayer.length > 1) {
                 var player2 = dataGamePlayer[1].Player.email;
                 if (data.PlayerLogin != null) {
                     if (data.PlayerLogin.email == player1 || data.PlayerLogin.email == player2) {
-                        createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2 + "<button id='Entry' class='button3'> Entry </button>";
-
+                        createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2 + "<a id='prueba' class='button3'> Entry </a>";
+                        var LinkEntry = document.getElementById("prueba");
+                        LinkEntry.setAttribute("id", "Entry" + i);
+                        var EntryLink = document.getElementById("Entry" + i);
+                        EntryLink.setAttribute("href", "http://localhost:8080/web/game.html?gp=" + dataGamePlayer[w].id);
                     }else{
                         createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2;
                     }
@@ -52,7 +54,7 @@ function getDataGame() {
                 }else{
                     createdLi.innerHTML = finalDateGame + " " + player1 +  player2;
                 }} else {
-                    createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player" + "<button id='Join' class='button3'> Join </button>";
+                    createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player" + "<a id='Join' class='button3'> Join </a>";
 
                 }
             }
