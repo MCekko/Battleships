@@ -1,21 +1,21 @@
 package com.battleship.salvov2;
 
 
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.context.annotation.Bean;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.security.authentication.AnonymousAuthenticationToken;
-        import org.springframework.security.core.Authentication;
-        import org.springframework.web.bind.annotation.*;
-        import sun.security.util.Password;
-        import java.net.Authenticator;
-        import java.security.acl.Owner;
-        import java.util.*;
-        import java.util.stream.Collector;
-        import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+import sun.security.util.Password;
+import java.net.Authenticator;
+import java.security.acl.Owner;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
-        import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/api")
@@ -122,6 +122,8 @@ public class SalvoController {
         return dto;
     }
 
+
+
     @RequestMapping("/game_view/{gameplayerID}")
     public Map<String, Object> getIDGamePlayer(@PathVariable Long gameplayerID)  {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
@@ -151,5 +153,20 @@ public class SalvoController {
         playerRepo.save(new Player(player.getUser(), player.getPassword()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-}
 
+    @RequestMapping(path = "/games", method = RequestMethod.POST)
+
+    public ResponseEntity<Object> createdGame( Authentication authentication) {
+
+        if (authentication != null){
+            Game newGame = new Game();
+            gameRepository.save(newGame);
+            GamePlayer newGamePlayer = new GamePlayer(getCurrentUser(authentication), newGame);
+            gamePlayerRepository.save(newGamePlayer);
+            return  new ResponseEntity<>(new HashMap<String, Long>()
+            {{put("GpID", newGamePlayer.getIdGamePLayer());}}, HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<>("You need be loged", HttpStatus.UNAUTHORIZED);
+        }
+    }
+}

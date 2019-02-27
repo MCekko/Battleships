@@ -14,10 +14,12 @@ function getData() {
 
     }).then(function (json) {
         data = json;
-        getDataGame();
-        insertScores ();
+
+        // CreatedGame();
         hideandShowLogin();
         hideButtonGames();
+        getDataGame();
+        insertScores ();
         console.log(data);
     }).catch(function (error) {
         console.log("Request failed:" + error.message);
@@ -38,9 +40,10 @@ function getDataGame() {
         createdLi.setAttribute("id", "listGameLI");
         for (var w = 0; w < dataGamePlayer.length; w++) {
             var player1 = dataGamePlayer[0].Player.email;
-            if (dataGamePlayer.length > 1) {
-                var player2 = dataGamePlayer[1].Player.email;
-                if (data.PlayerLogin != null) {
+            var player2 = dataGamePlayer[1] ? dataGamePlayer[1].Player.email : "waiting Player";
+            if (data.PlayerLogin !== null) {
+                console.log("Està logeado!!!")
+                if (dataGamePlayer.length > 1) {
                     if (data.PlayerLogin.email == player1 || data.PlayerLogin.email == player2) {
                         createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2 + "<a id='prueba' class='button3'> Entry </a>";
                         var LinkEntry = document.getElementById("prueba");
@@ -52,14 +55,23 @@ function getDataGame() {
                     }
 
                 }else{
-                    createdLi.innerHTML = finalDateGame + " " + player1 +  player2;
-                }} else {
-                    createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player" + "<a id='Join' class='button3'> Join </a>";
-
+                    if (data.PlayerLogin.email === player1){
+                        console.log("Soy yo el ùnico player")
+                        createdLi.innerHTML = finalDateGame + " " + player1 +  " vs waiting Player" + "<a id='prueba' class='button3'> Entry </a>";
+                        var LinkEntry = document.getElementById("prueba");
+                        LinkEntry.setAttribute("id", "Entry" + i);
+                        var EntryLink = document.getElementById("Entry" + i);
+                        EntryLink.setAttribute("href", "http://localhost:8080/web/game.html?gp=" + dataGamePlayer[w].id);
+                    } else{
+                        createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player" + "<a id='Join' class='button3'> Join </a>";
+                    }
                 }
+            } else {
+                console.log("No estàs loggeado")
+                createdLi.innerHTML = finalDateGame + " " + player1 + " vs " + player2;
             }
         }
-
+    }
 }
 function insertScores () {
     var arrayThead = ["Name", "Total", "Won", "Lost", "Tied"];
@@ -178,10 +190,35 @@ function Signup() {
         });
 }
 
+function CreatedGame() {
+
+    fetch("/api/games", {
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+    })
+        .then(function (response) {
+            console.log('Request success: ', response);
+            return response.json()
+        }).then(function (json) {
+        console.log(JSON.stringify(json))
+        window.open("http://localhost:8080/web/game.html?gp=" + json.GpID);
+        window.location.reload();
+    })
+        .catch(function (error) {
+            console.log('Request failure: ', error);
+        });
+}
+
 function hideandShowLogin() {
     if (data.PlayerLogin == null) {
         var x = document.getElementById("logout");
         x.style.display = "none";
+        var ñ = document.getElementById("createdgame");
+        ñ.style.display = "none";
     }
     else if(data.PlayerLogin) {
         var y = document.getElementById("login");
@@ -192,11 +229,10 @@ function hideandShowLogin() {
 }
 
 function hideButtonGames() {
-            if (data.PlayerLogin == null){
-                var m = document.getElementsByClassName("button3");
-                for (var t = 0; t < m.length; t++){
-                m[t].style.display = "none";
-                }
-            }
+    if (data.PlayerLogin == null){
+        var m = document.getElementsByClassName("button3");
+        for (var t = 0; t < m.length; t++){
+            m[t].style.display = "none";
+        }
+    }
 }
-

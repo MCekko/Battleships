@@ -1,16 +1,10 @@
 package com.battleship.salvov2;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.stream.Collectors.toList;
+import java.util.*;
 
 @Entity
 public class GamePlayer {
