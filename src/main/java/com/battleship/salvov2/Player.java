@@ -34,7 +34,7 @@ public class Player {
         scores.add(score);
     }
 
-    public void addPlayer(GamePlayer gameplayer) {
+    public void addGamePlayer(GamePlayer gameplayer) {
         gameplayer.setPlayer(this);
         gamePlayers.add(gameplayer);
     }

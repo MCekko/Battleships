@@ -90,10 +90,4 @@ public class GamePlayer {
     public void setSalvos(Set<Salvo> salvos) {
         this.salvos = salvos;
     }
-
-    public void addPlayer(Player player) {
-    }
-    public void addGame(Game game) {
-    }
-
 }

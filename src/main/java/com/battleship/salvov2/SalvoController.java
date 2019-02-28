@@ -130,9 +130,16 @@ public class SalvoController {
         GamePlayer gamePlayer = gamePlayerRepository.findOne(gameplayerID);
         Set<Ship> ships = gamePlayer.getShips();
         Set<Salvo> salvos = gamePlayer.getSalvos();
+
+        System.out.println("Pregiunto por el... " + gamePlayer.toString());
         Game game = gamePlayer.getGame();
-        Set<GamePlayer> gamePlayers = game.getGamePlayers();
-        dto.put("Game", makeGamesDTO(gamePlayer.getGame()));
+        System.out.println("Hola este es mi Game " + game);
+
+
+        Set<GamePlayer> gamePlayers =
+                game
+                        .getGamePlayers();
+        dto.put("Game", makeGamesDTO(game));
         dto.put("Ship", ships.stream().map(s -> makeShipDTO(s)).collect(Collectors.toList()));
         dto.put("Salvoes", gamePlayers.stream().map(gp -> makeSalvoDTO(gp.getSalvos())).collect(Collectors.toList()));
         return dto;
@@ -168,5 +175,21 @@ public class SalvoController {
         }else {
             return new ResponseEntity<>("You need be loged", HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @RequestMapping(path = "/game/{gameID}/players", method = RequestMethod.POST)
+
+    public ResponseEntity<Object> findGame(@PathVariable long gameID, Authentication authentication){
+
+        Game game = gameRepository.findOne(gameID);
+        Player player = getCurrentUser(authentication);
+        GamePlayer newGameplayer2 = new GamePlayer();
+
+        game.addGamePlayer(newGameplayer2);
+        player.addGamePlayer(newGameplayer2);
+
+        return new ResponseEntity<>(new HashMap<String, Long>(){{
+            put("gameID", gamePlayerRepository.save(newGameplayer2).getIdGamePLayer());
+        }}, HttpStatus.CREATED);
     }
 }

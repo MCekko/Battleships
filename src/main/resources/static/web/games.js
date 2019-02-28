@@ -63,7 +63,7 @@ function getDataGame() {
                         var EntryLink = document.getElementById("Entry" + i);
                         EntryLink.setAttribute("href", "http://localhost:8080/web/game.html?gp=" + dataGamePlayer[w].id);
                     } else{
-                        createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player" + "<a id='Join' class='button3'> Join </a>";
+                        createdLi.innerHTML = `finalDateGame + " " + player1 + "vs waiting Player" + <a id='Join' onclick='JoinButton(${dataGamePlayer[w].id})' class='button3'> Join </a>`;
                     }
                 }
             } else {
@@ -207,6 +207,29 @@ function CreatedGame() {
         console.log(JSON.stringify(json))
         window.open("http://localhost:8080/web/game.html?gp=" + json.GpID);
         window.location.reload();
+    })
+        .catch(function (error) {
+            console.log('Request failure: ', error);
+        });
+}
+
+function JoinButton(gameID) {
+
+    fetch("/api/game/" + gameID + "/players", {
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+    })
+        .then(function (response) {
+            console.log('Request success: ', response);
+            return response.json()
+        }).then(function (json) {
+        console.log(JSON.stringify(json))
+        window.open("http://localhost:8080/web/game.html?gp=" + json.gameID);
+        // window.location.reload();
     })
         .catch(function (error) {
             console.log('Request failure: ', error);
