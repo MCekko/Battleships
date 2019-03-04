@@ -63,7 +63,7 @@ function getDataGame() {
                         var EntryLink = document.getElementById("Entry" + i);
                         EntryLink.setAttribute("href", "http://localhost:8080/web/game.html?gp=" + dataGamePlayer[w].id);
                     } else{
-                        createdLi.innerHTML = `finalDateGame + " " + player1 + "vs waiting Player" + <a id='Join' onclick='JoinButton(${dataGamePlayer[w].id})' class='button3'> Join </a>`;
+                        createdLi.innerHTML = finalDateGame + " " + player1 + " vs waiting Player" + `<a id='Join' onclick='JoinButton(${idGame})' class='button3'> Join </a>`;
                     }
                 }
             } else {
