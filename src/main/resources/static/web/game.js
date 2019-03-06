@@ -14,12 +14,40 @@ function getData() {
         getDataGamePlayer();
         createdTable();
         createdTableShot();
-        // getOwnerofGame();
         console.log(data);
     }).catch(function (error) {
         console.log("Request failed:" + error.message);
     });
 
+}
+
+function CreatedNewShip() {
+
+    var newShip = "destroyer";
+    var locationShip = ["A1", "B1", "C1"];
+
+    fetch("/api/games/players/15/ships", {
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify([{
+            Type: newShip,
+            Location: locationShip,
+        }])
+    })
+        .then(function (data) {
+            console.log('Request success: ', data);
+
+        }).then(function () {
+        console.log(data);
+
+    })
+        .catch(function (error) {
+            console.log('Request failure: ', error);
+        });
 }
 var playerOwner;
 var playerOwnerID;

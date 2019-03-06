@@ -198,9 +198,9 @@ public class SalvoController {
             put("gameID", gamePlayerRepository.save(newGameplayer2).getIdGamePLayer());
         }}, HttpStatus.CREATED);
     }
-    @RequestMapping(path = "/games/players/{gamePlayerId}/ships", method = RequestMethod.POST)
 
-    public ResponseEntity<Object> addships(@PathVariable long gamePlayerId, List<Ship> ships
+    @RequestMapping(path = "/games/players/{gamePlayerId}/ships", method = RequestMethod.POST)
+    public ResponseEntity<Object> addships(@PathVariable long gamePlayerId, @RequestBody List<Ship> ships
             ,Authentication authentication){
         if (getCurrentUser(authentication) == null) {
             return new ResponseEntity<>("Error", HttpStatus.FORBIDDEN);
