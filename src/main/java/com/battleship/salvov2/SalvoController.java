@@ -203,10 +203,12 @@ public class SalvoController {
     public ResponseEntity<Object> addships(@PathVariable long gamePlayerId, @RequestBody List<Ship> ships
             ,Authentication authentication){
         if (getCurrentUser(authentication) == null) {
+
             return new ResponseEntity<>("Error", HttpStatus.FORBIDDEN);
         }
         GamePlayer gp = gamePlayerRepository.findOne(gamePlayerId);
         if (gp.getShips().size() > 0){
+
             return new ResponseEntity<>("Error", HttpStatus.FORBIDDEN);
         }
 
@@ -214,6 +216,6 @@ public class SalvoController {
             gp.addShip(ship);
         }
         shipRepository.save(ships);
-        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

@@ -227,9 +227,8 @@ function JoinButton(gameID) {
             console.log('Request success: ', response);
             return response.json()
         }).then(function (json) {
-        console.log(JSON.stringify(json))
-        window.open("http://localhost:8080/web/game.html?gp=" + json.gameID);
-        // window.location.reload();
+        console.log("Alejandro", JSON.stringify(json))
+        window.location.replace("http://localhost:8080/web/game.html?gp=" + json.gameID);
     })
         .catch(function (error) {
             console.log('Request failure: ', error);

@@ -34,8 +34,8 @@ function CreatedNewShip() {
         },
         method: 'POST',
         body: JSON.stringify([{
-            Type: newShip,
-            Location: locationShip,
+            shipType: newShip,
+            listPosition: locationShip,
         }])
     })
         .then(function (data) {

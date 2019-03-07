@@ -315,12 +315,12 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/games.js").permitAll()
                 .antMatchers("/web/Main.css").permitAll()
                 .antMatchers("/web/fondo.jpg").permitAll()
-                .antMatchers("/rest").permitAll()
+                .antMatchers("/rest/**").denyAll()
                 .antMatchers("/api/games").permitAll()
                 .antMatchers("/api/players").permitAll()
-                .antMatchers("/api/games/players/15/ships").permitAll()
-                .antMatchers("/**").hasAuthority("USER")
-                .and()
+                .anyRequest().hasAuthority("USER");
+
+                http
                 .formLogin()
                 .usernameParameter("name")
                 .passwordParameter("password")
@@ -351,6 +351,3 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
     }
     }
-
-
-
