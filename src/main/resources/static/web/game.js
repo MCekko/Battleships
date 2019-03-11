@@ -80,16 +80,17 @@ function getParameterByName(name) {
     var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
+var arrayNumbers = [" ",1,2,3,4,5,6,7,8,9,10];
+
+var arrayLetter = ["A","B","C","D","E","F","G","H","I","J"];
+
+var idCells = [];
 function createdTable() {
     getOwnerofGame();
     var playersInGame = document.getElementById("PlayerinGame");
     var dataGamePlayer2 = data.Game.GamePlayers;
-        playersInGame.textContent = playerOwner + " vs " + playerOponent;
+    playersInGame.textContent = playerOwner + " vs " + playerOponent;
 
-
-    var arrayNumbers = [" ",1,2,3,4,5,6,7,8,9,10];
-
-    var arrayLetter = ["A","B","C","D","E","F","G","H","I","J"];
 
     var PrincipalTable = document.getElementById("Table");
     var createdTHEAD = document.createElement("thead");
@@ -117,18 +118,40 @@ function createdTable() {
             var createdTD2 = document.createElement("td");
             createdTRLetter.appendChild(createdTD2);
             createdTD2.setAttribute("id", arrayLetter[j] + arrayNumbers[w +1]);
+            createdTD2.onclick = ala(arrayLetter[j] + arrayNumbers[w +1]);
+            idCells.push(arrayLetter[j] + arrayNumbers[w +1]);
+
         }
+        console.log(idCells);
     }
     var dataShips2 =data.Ship;
     for(var b = 0; b < dataShips2.length; b++){
         var dataLocation2 = dataShips2[b].Location;
 
         for (var q= 0; q <dataLocation2.length; q++) {
-                document.getElementById(dataLocation2[q]).setAttribute("class", "locationShips");
-            }
+            document.getElementById(dataLocation2[q]).setAttribute("class", "locationShips");
+        }
     }
 
 }
+var Destroyer = [];
+function ala(id) {
+    return function putNewShips() {
+        for (var w = 0; w < idCells.length; w++) {
+            if (id == idCells[w]){
+                console.log(idCells);
+
+                Destroyer = [idCells[w], idCells[w + 1], idCells[w + 2]];
+                // Destroyer.setAttribute("class", "AircraftCarrier")
+                console.log(Destroyer);
+            }
+
+        }
+    }
+    console.log("Hola1");
+}
+
+
 
 function createdTableShot() {
 
@@ -193,7 +216,7 @@ function createdTableShot() {
                     document.getElementById(dataShotLocation2[t] + "s").setAttribute("class", "locationShot");
                     document.getElementById(dataShotLocation2[t] + "s").textContent = dataTurn;
                 }else{
-                        console.log(dataShotLocation2[t]);
+                    console.log(dataShotLocation2[t]);
 
                     if(document.getElementById(dataShotLocation2[t]).getAttribute("class") == "locationShips"){
                         document.getElementById(dataShotLocation2[t]).setAttribute("class", "locationHit");
@@ -205,17 +228,17 @@ function createdTableShot() {
                     }
                 }
             }
-            }
         }
+    }
 
 }
 
 function getDataGamePlayer() {
 
-        var idGame = data.Game.id;
-        var dataGamePlayer = data.Game.GamePlayers;
-        var dataShips = data.Ship;
-        for (let j = 0; j < dataGamePlayer.length; j++) {
+    var idGame = data.Game.id;
+    var dataGamePlayer = data.Game.GamePlayers;
+    var dataShips = data.Ship;
+    for (let j = 0; j < dataGamePlayer.length; j++) {
         var dataPlayer =  dataGamePlayer[j].Player.email;
     }
     for (let i = 0; i < dataShips.length; i++) {

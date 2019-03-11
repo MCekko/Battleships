@@ -107,6 +107,23 @@ li{
     padding: 15px;
 }
  /*ships location*/
+
+.AircraftCarrier{
+    background-color: yellow;
+}
+.Battleship{
+    background-color: purple;
+}
+.Submarine{
+    background-color: white;
+}
+.Destroyer{
+    background-color: orangered;
+}
+.PatrolBoat{
+    background-color: blue;
+}
+
 .locationShips{
     background-color: yellow;
 }
@@ -114,7 +131,7 @@ li{
     background-color: green;
 }
 .locationHitWater{
-    background-color: blue;
+    background-color: aqua;
 }
 .locationHit{
     background-color: red;
