@@ -122,7 +122,6 @@ function createdTable() {
             idCells.push(arrayLetter[j] + arrayNumbers[w +1]);
 
         }
-        console.log(idCells);
     }
     var dataShips2 =data.Ship;
     for(var b = 0; b < dataShips2.length; b++){
@@ -134,21 +133,38 @@ function createdTable() {
     }
 
 }
-var Destroyer = [];
+var DestroyerPosition = [];
+var allShipsPosition = [];
 function ala(id) {
     return function putNewShips() {
+        for (var m = 0; m < DestroyerPosition.length; m++) {
+            document.getElementById(DestroyerPosition[m]).setAttribute("class", "");
+        }
         for (var w = 0; w < idCells.length; w++) {
-            if (id == idCells[w]){
-                console.log(idCells);
+            if (id === idCells[w]) {
+                DestroyerPosition = [];
+                DestroyerPosition = [idCells[w], idCells[w + 1], idCells[w + 2]];
+                console.log(DestroyerPosition);
 
-                Destroyer = [idCells[w], idCells[w + 1], idCells[w + 2]];
-                // Destroyer.setAttribute("class", "AircraftCarrier")
-                console.log(Destroyer);
+                for (var q = 0; q < DestroyerPosition.length; q++) {
+                    document.getElementById(DestroyerPosition[q]).setAttribute("class", "Destroyer");
+                }
             }
-
+            if (DestroyerPosition.length === 3) {
+                if (DestroyerPosition[0].split("")[0] != DestroyerPosition[1].split("")[0]
+                    || DestroyerPosition[0].split("")[0] != DestroyerPosition[2].split("")[0]) {
+                    console.log(DestroyerPosition[0].split("")[0], DestroyerPosition[1].split("")[0], DestroyerPosition[2].split("")[0]);
+                    for (var f = 0; f < DestroyerPosition.length; f++) {
+                        document.getElementById(DestroyerPosition[f]).setAttribute("class", "");
+                    }
+                    DestroyerPosition = [];
+                    console.log(DestroyerPosition);
+                }else if (DestroyerPosition[1] == null || DestroyerPosition[2] == null){
+                    
+                }
+            }
         }
     }
-    console.log("Hola1");
 }
 
 
