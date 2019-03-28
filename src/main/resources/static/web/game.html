@@ -11,6 +11,15 @@
 <body>
 <h1>Ship Locations!</h1>
 <h2 id = PlayerinGame></h2>
+<div class="dropdown">
+    <button value = "Destroyer" onclick="implementShips(typeShip,orientationShip)" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Destroyer
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+        <a value = "Horizontal" onclick="implementShips(typeShip,orientationShip)">Horizontal</a>
+        <a value = "Vertical" onclick="implementShips(typeShip,orientationShip)">Vertical</a>
+    </ul>
+</div>
+</div>
 <table id="Table" class="table table-bordered"></table>
 <table id="Table2" class="table table-bordered"></table>
 <script src="game.js"></script>

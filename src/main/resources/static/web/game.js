@@ -137,42 +137,85 @@ function createdTable() {
     }
 
 }
+var typeShip = Array.from(document.getElementsByTagName("button"));
+var orientationShip = Array.from(document.getElementsByTagName("a"));
+function implementShips(type, orientation) {
+    typeShip = type;
+    orientationShip = orientation;
+    console.log(typeShip);
+    console.log(orientationShip);
+}
 
+var AircraftCarrierPosition = [];
+var BattleshipPosition = [];
+var SubmarinePosition = [];
+var PatrolBoatPosition = [];
 var DestroyerPosition = [];
 var allShipsPosition = [];
 
 function ala(id) {
     return function putNewShips() {
-        for (var m = 0; m < DestroyerPosition.length; m++) {
-            document.getElementById(DestroyerPosition[m]).setAttribute("class", "");
-        }
-        for (var w = 0; w < idCells.length; w++) {
-            if ( idCells[w + 1] == null || idCells[w + 2] == null){
-                DestroyerPosition = [];
-            } else if (id === idCells[w]) {
+        // if ((typeShip === "Destroyer") && orientationShip === "Horizontal") {
+            for (var m = 0; m < DestroyerPosition.length; m++) {
+                document.getElementById(DestroyerPosition[m]).setAttribute("class", "");
+            }
 
-                DestroyerPosition = [];
-                DestroyerPosition = [idCells[w], idCells[w + 1], idCells[w + 2]];
-                console.log(DestroyerPosition);
 
-                for (var q = 0; q < DestroyerPosition.length; q++) {
-                    console.log(DestroyerPosition[q])
-                    document.getElementById(DestroyerPosition[q]).setAttribute("class", "Destroyer");
+            for (var w = 0; w < idCells.length; w++) {
+                if (idCells[w + 1] === undefined || idCells[w + 2] === undefined) {
+
+                } else if (id === idCells[w]) {
+                    DestroyerPosition = [];
+                    DestroyerPosition = [idCells[w], idCells[w + 1], idCells[w + 2]];
+
+                    for (var q = 0; q < DestroyerPosition.length; q++) {
+                        document.getElementById(DestroyerPosition[q]).setAttribute("class", "Destroyer");
+                    }
+                }
+                if (DestroyerPosition.length === 3) {
+                    if (DestroyerPosition[0].split("")[0] != DestroyerPosition[1].split("")[0]
+                        || DestroyerPosition[0].split("")[0] != DestroyerPosition[2].split("")[0]) {
+                        for (var f = 0; f < DestroyerPosition.length; f++) {
+                            document.getElementById(DestroyerPosition[f]).setAttribute("class", "");
+
+
+                        }
+                        DestroyerPosition = [];
+                    }
                 }
             }
-        }
-        if (DestroyerPosition.length === 3) {
-            if (DestroyerPosition[0].split("")[0] != DestroyerPosition[1].split("")[0]
-                || DestroyerPosition[0].split("")[0] != DestroyerPosition[2].split("")[0]) {
-                console.log(DestroyerPosition[0].split("")[0], DestroyerPosition[1].split("")[0], DestroyerPosition[2].split("")[0]);
-                for (var f = 0; f < DestroyerPosition.length; f++) {
-                    document.getElementById(DestroyerPosition[f]).setAttribute("class", "");
-                }
-                DestroyerPosition = [];
-            }
-        }
+        // }
+        // if ((typeShip === "Destroyer") && orientationShip === "Vertical") {
+        //     for (var m = 0; m < DestroyerPosition.length; m++) {
+        //         document.getElementById(DestroyerPosition[m]).setAttribute("class", "");
+        //     }
+        //
+        //
+        //     for (var w = 0; w < idCells.length; w++) {
+        //         if (idCells[w + 10] === undefined || idCells[w + 20] === undefined) {
+        //
+        //         } else if (id === idCells[w]) {
+        //             DestroyerPosition = [];
+        //             DestroyerPosition = [idCells[w], idCells[w + 10], idCells[w + 20]];
+        //
+        //             for (var q = 0; q < DestroyerPosition.length; q++) {
+        //                 document.getElementById(DestroyerPosition[q]).setAttribute("class", "Destroyer");
+        //             }
+        //         }
+        //         if (DestroyerPosition.length === 3) {
+        //             if (DestroyerPosition[0].split("")[0] != DestroyerPosition[1].split("")[0]
+        //                 || DestroyerPosition[0].split("")[0] != DestroyerPosition[2].split("")[0]) {
+        //                 for (var f = 0; f < DestroyerPosition.length; f++) {
+        //                     document.getElementById(DestroyerPosition[f]).setAttribute("class", "");
+        //
+        //
+        //                 }
+        //                 DestroyerPosition = [];
+        //             }
+        //         }
+        //     }
+        // }
     }
-    console.log(DestroyerPosition);
 }
 
 
